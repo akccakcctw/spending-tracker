@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 import { state, actions, mutations } from './root';
 import * as getters from './getters';
 // modules
-import login from './modules/sample';
+import sample from './modules/sample';
 
 Vue.use(Vuex);
 
@@ -15,7 +15,7 @@ export default new Vuex.Store({
   mutations,
   getters,
   modules: {
-    login,
+    sample,
   },
   // strict mode
   strict: true,
