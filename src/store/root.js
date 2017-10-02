@@ -20,31 +20,41 @@ export const actions = {
             // sessionStroage
             localStorage.setItem('token', '3345678');
             localStorage.setItem('user', JSON.stringify(user));
-
-            commit(types.USER, user);
-            commit(types.TOKEN, '3345678');
-            commit(types.LOADING, false);
             resolve();
           })
           .catch((err) => { throw err; });
+        this.dispatch('actionAuthStateObserver');
       } else {
         commit(types.LOADING, false);
         reject();
       }
     });
   },
-  actionSignOut({ commit }) {
+  actionSignOut() {
     firebase.auth()
       .signOut()
       .then(() => {
         // clear sessionStroage
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-
-        commit(types.USER, null);
-        commit(types.TOKEN, '');
       })
       .catch((err) => { throw err; });
+    this.dispatch('actionAuthStateObserver');
+  },
+  actionAuthStateObserver({ commit }) {
+    firebase.auth()
+      .onAuthStateChanged((user) => {
+        if (user) {
+          // user logged in
+          commit(types.USER, user);
+          commit(types.TOKEN, '3345678');
+          commit(types.LOADING, false);
+        } else {
+          // user signed out
+          commit(types.USER, null);
+          commit(types.TOKEN, '');
+        }
+      });
   },
 };
 
