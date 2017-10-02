@@ -12,10 +12,8 @@ export default {
   },
   methods: {
     handleSignOut() {
-      this.$store.dispatch('actionSignOut')
-        .then(() => {
-          this.$router.push('/login');
-        });
+      this.$router.push('/login');
+      this.$store.dispatch('actionSignOut');
     },
   },
 };
