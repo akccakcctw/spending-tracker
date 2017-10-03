@@ -1,14 +1,13 @@
 <template lang="pug">
   div.m-login
-    form#login(@submit.prevent="handleLogin")
-      h2.title 登入
-      label.label(for="email")
-        span.text 電子郵件
-        input.input#email(type="email", v-model="formData.email")
-      label.label(for="password")
-        span.text 密碼
-        input.input#password(type="password", v-model="formData.password")
-      button.btn(type="submit") 登入
+    h2.title 登入
+    el-form(ref="form" :model="form").form
+      el-form-item(label="電子郵件")
+        el-input(v-model="form.email", type="email")
+      el-form-item(label="密碼")
+        el-input(v-model="form.password", type="password")
+      el-form-item
+        el-button(@click="handleLogin") 登入
 </template>
 
 <script>
@@ -18,7 +17,7 @@ export default {
   data() {
     return {
       title: 'Spending Tracker',
-      formData: {
+      form: {
         email: '',
         password: '',
       },
@@ -27,8 +26,8 @@ export default {
   methods: {
     handleLogin() {
       this.$store.dispatch('actionLogin', {
-        email: this.formData.email,
-        password: this.formData.password,
+        email: this.form.email,
+        password: this.form.password,
       })
         .then(() => {
           this.$router.push('/user');
@@ -40,22 +39,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+.form {
+  max-width: 350px;
+  margin: 0 auto;
 }
 </style>

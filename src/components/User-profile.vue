@@ -7,7 +7,7 @@
       el-form-item(label="頭像")
         el-input(v-model="form.photoURL", placeholder="請輸入網址")
       el-form-item(label="信箱")
-        el-input(v-model="form.email")
+        el-input(v-model="form.email", type="email")
       el-form-item
         el-button(@click="resetPassword") 重設密碼
       el-form-item
@@ -43,7 +43,7 @@ export default {
 
 <style lang="scss" scoped>
 .form {
-  max-width: 400px;
+  max-width: 350px;
   margin: 0 auto;
 }
 </style>

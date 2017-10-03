@@ -1,17 +1,15 @@
 <template lang="pug">
   div.m-sign-up
-    form#sign-up(@submit.prevent="handleSignUp")
-      h2.title 註冊
-      label.label(for="email")
-        span.text 電子郵件
-        input.input#email(type="email", v-model="formData.email")
-      label.label(for="password")
-        span.text 密碼
-        input.input#password(type="password", v-model="formData.password")
-      label.label(for="password-confirm")
-        span.text 密碼確認
-        input.input#password-confirm(type="password", v-model="formData.passwordConfirm")
-      button.btn(type="submit") 註冊
+    h2.title 註冊
+    el-form(ref="form" :model="form").form
+      el-form-item(label="電子郵件")
+        el-input(v-model="form.email", type="email")
+      el-form-item(label="密碼")
+        el-input(v-model="form.password", type="password")
+      el-form-item(label="密碼確認")
+        el-input(v-model="form.passwordConfirm", type="password")
+      el-form-item
+        el-button(@click="handleSignUp") 註冊
 </template>
 
 <script>
@@ -20,7 +18,7 @@ import swal from 'sweetalert2';
 export default {
   data() {
     return {
-      formData: {
+      form: {
         email: '',
         password: '',
         passwordConfirm: '',
@@ -29,7 +27,7 @@ export default {
   },
   methods: {
     passwordConfirm() {
-      return this.password === this.passwordConfirm;
+      return this.form.password === this.form.passwordConfirm;
     },
     handleSignUp() {
       if (!this.passwordConfirm()) {
@@ -41,7 +39,7 @@ export default {
         return;
       }
       firebase.auth()
-        .createUserWithEmailAndPassword(this.formData.email, this.formData.password)
+        .createUserWithEmailAndPassword(this.form.email, this.form.password)
         .then(() => {
           this.$router.push('/login');
         })
@@ -52,5 +50,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.form {
+  max-width: 350px;
+  margin: 0 auto;
+}
 </style>

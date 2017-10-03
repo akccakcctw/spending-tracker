@@ -1,6 +1,6 @@
 <template lang="pug">
   div.m-sign-out
-    button(@click="handleSignOut") 登出
+    el-button(@click="handleSignOut") 登出
 </template>
 
 <script>
