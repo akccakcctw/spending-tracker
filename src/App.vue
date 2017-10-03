@@ -1,6 +1,6 @@
 <template lang="pug">
   div#app
-    h1.title {{ mainTitle }}
+    DefaultMenu
     transition(name="fade", mode="out-in")
       router-view
 </template>
@@ -8,6 +8,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { headMeta, headLink } from './head';
+import DefaultMenu from './components/DefaultMenu';
 
 export default {
   name: 'app',
@@ -42,6 +43,9 @@ export default {
       this.$router.push('/user');
     },
   },
+  components: {
+    DefaultMenu,
+  },
 };
 </script>
 
@@ -53,6 +57,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  padding-top: 1em;
 }
 
 .fade-enter-active,
