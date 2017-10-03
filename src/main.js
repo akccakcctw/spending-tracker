@@ -5,6 +5,7 @@ import VueHead from 'vue-head';
 import VeeValidate, { Validator } from 'vee-validate';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import ElementUI from 'element-ui';
 import App from './App';
 import router from './router';
 import store from './store';
@@ -16,9 +17,14 @@ import validatorDict from './validate';
 
 Vue.config.productionTip = false;
 
+const veeConfig = {
+  fieldsBagName: 'v-fields', // 'fields' conflict with ElementUI
+};
+
 Vue.use(VueHead);
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, veeConfig);
 Vue.use(VueAxios, axios);
+Vue.use(ElementUI);
 
 // 表單驗證
 Validator.updateDictionary(validatorDict);
