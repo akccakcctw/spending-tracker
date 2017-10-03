@@ -13,21 +13,23 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex';
 import SignOut from './Sign-out';
 
 export default {
   data() {
     return {
       activeIndex: '1',
-      user: this.$store.state.user,
+      user: this.$store.getters.getUser,
     };
   },
   computed: {
-    isLoggedIn: {
-      get() {
-        return this.$store.state.user;
-      },
-    },
+    ...mapGetters([
+      'getUser',
+    ]),
+    ...mapState({
+      isLoggedIn: 'user',
+    }),
   },
   methods: {
     handleSelect(key, keyPath) {

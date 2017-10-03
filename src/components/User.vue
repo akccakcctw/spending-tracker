@@ -12,13 +12,6 @@ export default {
 
     };
   },
-  computed: {
-    user: {
-      get() {
-        return this.$store.state.user;
-      },
-    },
-  },
   components: {
     UserProfile,
   },

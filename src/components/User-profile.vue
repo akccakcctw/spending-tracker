@@ -15,19 +15,28 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import swal from 'sweetalert2';
+
 export default {
   name: 'userProfile',
   data() {
     return {
       form: {
-        name: this.$store.state.user.displayName,
-        email: this.$store.state.user.email,
+        name: this.$store.getters.getUser.displayName,
+        photoURL: this.$store.getters.getUser.photoURL,
+        email: this.$store.getters.getUser.email,
       },
     };
   },
+  computed: {
+    ...mapGetters([
+      'getUser',
+    ]),
+  },
   methods: {
     resetPassword() {
-      const email = this.$store.state.user.email;
+      const email = this.$store.getters.getUser.email;
       firebase.auth()
         .sendPasswordResetEmail(email)
         .then(() => {
@@ -36,6 +45,20 @@ export default {
         .catch((err) => { throw err; });
     },
     onSubmit() {
+      const user = firebase.auth().currentUser;
+      user.updateProfile({
+        displayName: this.form.name,
+        photoURL: this.form.photoURL,
+      })
+        .then(() => {
+          // Update successful
+          swal(
+            'Success',
+            '用戶資料修改完成',
+            'success',
+          );
+        })
+        .catch((err) => { throw err; });
     },
   },
 };
