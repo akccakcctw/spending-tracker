@@ -1,6 +1,6 @@
 <template lang="pug">
   div.m-sign-out
-    el-button(@click="handleSignOut") 登出
+    el-button.sign-out(@click="handleSignOut", type="text") 登出
 </template>
 
 <script>
@@ -20,6 +20,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.sign-out {
+  padding: 0 20px;
+  height: 60px;
+}
 </style>
 

@@ -5,13 +5,13 @@
       el-form-item(label="名稱")
         el-input(v-model="form.name")
       el-form-item(label="頭像")
-        el-input(v-model="form.photoURL", placeholder="請輸入網址")
+        el-input(v-model="form.photoURL", placeholder="請輸入圖片網址")
       el-form-item(label="信箱")
         el-input(v-model="form.email", type="email")
       el-form-item
-        el-button(@click="resetPassword") 重設密碼
+        el-button(@click="resetPassword") 修改密碼
       el-form-item
-        el-button(@click="onSubmit") 確認修改
+        el-button(@click="onSubmit", type="primary") 確認修改
 </template>
 
 <script>
