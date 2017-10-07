@@ -49,3 +49,6 @@ const config = {
   messagingSenderId: '945969104199',
 };
 firebase.initializeApp(config);
+const db = firebase.firestore();
+
+export default db;

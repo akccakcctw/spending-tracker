@@ -17,6 +17,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import swal from 'sweetalert2';
+import db from '../main';
 
 export default {
   name: 'userProfile',
@@ -50,6 +51,15 @@ export default {
         displayName: this.form.name,
         photoURL: this.form.photoURL,
       })
+        .then(() => {
+          const userId = user.uid;
+          db.collection('users').doc(userId).update({
+            name: this.form.name,
+            displayName: this.form.name,
+            photoURL: this.form.photoURL,
+          })
+            .catch((err) => { throw err; });
+        })
         .then(() => {
           // Update successful
           swal(
