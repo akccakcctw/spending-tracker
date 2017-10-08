@@ -6,6 +6,8 @@ import VeeValidate, { Validator } from 'vee-validate';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import ElementUI from 'element-ui';
+import * as firebase from 'firebase';
+import 'firebase/firestore';
 import App from './App';
 import router from './router';
 import store from './store';
@@ -31,13 +33,6 @@ Validator.updateDictionary(validatorDict);
 Validator.setLocale('zh_TW');
 
 /* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  store,
-  template: '<App/>',
-  components: { App },
-});
 
 // Initialize Firebase
 const config = {
@@ -48,7 +43,16 @@ const config = {
   storageBucket: 'spending-tracker-38aea.appspot.com',
   messagingSenderId: '945969104199',
 };
-firebase.initializeApp(config);
-const db = firebase.firestore();
 
+Vue.prototype.$firebase = firebase.initializeApp(config);
+
+new Vue({
+  el: '#app',
+  router,
+  store,
+  template: '<App/>',
+  components: { App },
+});
+
+const db = firebase.firestore();
 export default db;
